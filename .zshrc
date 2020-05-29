@@ -213,6 +213,8 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 # SHA1
 alias sha1='openssl sha1'
 
+
+
 # Copy file with a progress bar
 cpp()
 {
@@ -435,3 +437,40 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# CUSTOM SETTINGS FROM THE INTERNERT 
+# URL: https://callstack.com/blog/supercharge-your-terminal-with-zsh/?__cf_chl_captcha_tk__=cc712acced30f7511603e70867b0ab9e86c60f8d-1590687615-0-AXAcDLlqp8eD3eu6R-RH7Rf7xwvNhYTB7Wdy1T7tl1q51uMfP94c_l1bj2ZaEO6-FNqUH5zhigQLkTWSudLGtEMHD5gce7FoyjWAFnXsM-T_slAYagc44JxvlbGzYBaLrAdH4ifME6803maZboYck-2ICtsrHrqvkx31nEGztflpAyOxUwoHUpgl9j7Y6qfR9-D6sO_vygn8shXM1U-v-vwO9S7CH4x-wl835vpS873mZYhwg9Tk5CWknggPsHtexdhhsT_hJqCI9PPusOHqQrdUogSa1NW1vN_1iW_me_APGWWKAp43Zi9fJHmGq9L7eTR5wNspnkon2xazz7m9nLg4cdtq9nJ-1D4rpfg3vo6Hiv43-R3OFkkO9H-LNRoC53oeLCY7UZobcvnh1XMOcYeGqDs3Ur7GkEWoM2QAL9tfw4PiBpZlGIxuNX19h90K0M-nML_cLuQD5dyda3KUkzhKFze_q8RVaZuXnEcy2IE8rQ6NqfmsVvpecYNb_XVbnLZZDJKG2JYAtcwyh_wF451ddHSHoparz6C0BaMvsjFYu8EFm6dfhRdh3IvkHf6JwA
+# Enable autocompletions
+autoload -Uz compinit
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
+zmodload -i zsh/complist
+# Save history so we get auto suggestions
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+# Options
+setopt auto_cd # cd by typing directory name if it's not a command
+setopt auto_list # automatically list choices on ambiguous completion
+setopt auto_menu # automatically use menu completion
+setopt always_to_end # move cursor to end if word had one match
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different instances
+setopt correct_all # autocorrect commands
+setopt interactive_comments # allow comments in interactive shells
+# Improve autocompletion style
+zstyle ':completion:*' menu select # select completions with arrow keys
+zstyle ':completion:*' group-name '' # group results by category
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+# Keybindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[[3~' delete-char
+bindkey '^[3;5~' delete-char
+

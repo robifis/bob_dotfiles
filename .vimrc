@@ -1,4 +1,5 @@
 syntax on
+filetype off
 
 set cursorline
 set guicursor=
@@ -20,7 +21,8 @@ set undofile
 set incsearch
 set termguicolors
 set scrolloff=8
-
+" Leader Key
+let mapleader=" " " Space is the Leader Key!
 " Enter Key to turn off highlighting after search!
 nnoremap <CR> :noh<CR><CR>
 
@@ -35,11 +37,92 @@ set shortmess+=c
 
 set colorcolumn=110
 highlight ColorColumn ctermbg=0 guibg=lightgrey
+" DT VIMRC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set path+=**					" Searches current directory recursively.
+set wildmenu					" Display all matches when tab complete.
+set incsearch                   " Incremental search
+set hidden                      " Needed to keep multiple buffers open
+set nobackup                    " No auto backups
+set noswapfile                  " No swap
+set t_Co=256                    " Set if term supports 256 colors.
+set number relativenumber       " Display line numbers
+set clipboard=unnamedplus       " Copy/paste between vim and other programs.
+let g:rehash256 = 1
+set wildignore+=**/node_modules/** 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=38
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Theming
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight LineNr           ctermfg=8    ctermbg=none    cterm=none
+highlight CursorLineNr     ctermfg=7    ctermbg=8       cterm=none
+highlight VertSplit        ctermfg=0    ctermbg=8       cterm=none
+highlight Statement        ctermfg=2    ctermbg=none    cterm=none
+highlight Directory        ctermfg=4    ctermbg=none    cterm=none
+highlight StatusLine       ctermfg=7    ctermbg=8       cterm=none
+highlight StatusLineNC     ctermfg=7    ctermbg=8       cterm=none
+highlight NERDTreeClosable ctermfg=2
+highlight NERDTreeOpenable ctermfg=8
+highlight Comment          ctermfg=4    ctermbg=none    cterm=none
+highlight Constant         ctermfg=12   ctermbg=none    cterm=none
+highlight Special          ctermfg=4    ctermbg=none    cterm=none
+highlight Identifier       ctermfg=6    ctermbg=none    cterm=none
+highlight PreProc          ctermfg=5    ctermbg=none    cterm=none
+highlight String           ctermfg=12   ctermbg=none    cterm=none
+highlight Number           ctermfg=1    ctermbg=none    cterm=none
+highlight Function         ctermfg=1    ctermbg=none    cterm=none
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Mouse Scrolling
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set mouse=nicr
+
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+" Removes pipes | that act as seperators on splits
+set fillchars+=vert:\
 
 "=======================================================================
 call plug#begin('~/.vim/plugged')
 
+" DT PLUGINS!
+Plug 'itchyny/lightline.vim'                       " Lightline statusbar
+Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
+Plug 'frazrepo/vim-rainbow'
+Plug 'vifm/vifm.vim'                               " Vifm
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
+Plug 'vimwiki/vimwiki'                             " VimWiki
+Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
+Plug 'tpope/vim-surround'                          " Change surrounding marks
+Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
+Plug 'vim-python/python-syntax'                    " Python highlighting
+Plug 'ap/vim-css-color'                            " Color previews for CSS
+Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
+Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
+Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
+" DT END
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'rakr/vim-one'
 Plug 'junegunn/fzf.vim'
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
@@ -97,8 +180,6 @@ let g:fzf_action = {
             \ 'ctrl-v': 'vsplit'
             \}
 
-" Ignoring Node Modules
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Moving around between panes
 nnoremap <C-J> <C-W><C-J>
@@ -106,7 +187,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-colorscheme gruvbox
+let g:airline_theme='one'
+colorscheme one
 set background=dark
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
