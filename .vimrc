@@ -53,6 +53,12 @@ set clipboard=unnamedplus       " Copy/paste between vim and other programs.
 let g:rehash256 = 1
 set wildignore+=**/node_modules/** 
 
+"Kite Autocomplete
+let g:kite_supported_languages = ['python', 'javascript', 'go']
+let g:kite_tab_complete=1
+set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2  " always display the status line
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree
@@ -121,6 +127,7 @@ Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
 Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
 Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 " DT END
+Plug 'kiteco/vim-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rakr/vim-one'
 Plug 'junegunn/fzf.vim'
