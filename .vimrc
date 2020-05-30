@@ -112,6 +112,7 @@ set fillchars+=vert:\
 call plug#begin('~/.vim/plugged')
 
 " DT PLUGINS!
+Plug 'vheon/vim-cursormode'
 Plug 'itchyny/lightline.vim'                       " Lightline statusbar
 Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
 Plug 'frazrepo/vim-rainbow'
@@ -144,10 +145,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
-"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
-"  TOOOOOOOOOOOOO
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'morhetz/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
@@ -160,6 +158,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 "=======================================================================
+" Configurig Cursor Color based on Mode
+let cursormode_color_map = {
+            \ "n": "#56E39F",
+            \ "i": "#58a4b0",
+            \ "v": "#dc758f",
+            \ "V": "#fcff6c",
+            \}
+
+
 
 " Emmet Autocomplete (Same as VS Code!)
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
