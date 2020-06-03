@@ -1,5 +1,7 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+PATH=$HOME/bin:/usr/local/bin:home/bobby/.cargo/bin/$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/bobby/.oh-my-zsh"
@@ -133,6 +135,9 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+alias update="sudo apt update && sudo apt upgrade -y"
+alias remove="sudo apt autoremove -y"
 
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
@@ -426,12 +431,10 @@ function whatsmyip ()
 	echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
 }
 
-neofetch
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#DB9065,underline"
 
-source /home/bobby/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/bobby/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/bobby/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/bobby/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -474,3 +477,4 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
 
+colorscript random

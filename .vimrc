@@ -7,8 +7,8 @@ set noshowmatch
 set nohlsearch
 set hidden
 set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
 set nu relativenumber
@@ -23,6 +23,7 @@ set termguicolors
 set scrolloff=8
 " Leader Key
 let mapleader=" " " Space is the Leader Key!
+
 " Enter Key to turn off highlighting after search!
 nnoremap <CR> :noh<CR><CR>
 
@@ -36,7 +37,7 @@ set updatetime=50
 set shortmess+=c
 
 set colorcolumn=110
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=0 guibg='#689d6a'
 " DT VIMRC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Settings
@@ -113,21 +114,22 @@ call plug#begin('~/.vim/plugged')
 
 " DT PLUGINS!
 Plug 'vheon/vim-cursormode'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'sainnhe/edge'
 Plug 'itchyny/lightline.vim'                       " Lightline statusbar
 Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
 Plug 'frazrepo/vim-rainbow'
 Plug 'vifm/vifm.vim'                               " Vifm
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
-Plug 'vimwiki/vimwiki'                             " VimWiki
-Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
 Plug 'tpope/vim-surround'                          " Change surrounding marks
 Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
 Plug 'vim-python/python-syntax'                    " Python highlighting
 Plug 'ap/vim-css-color'                            " Color previews for CSS
 Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
-Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
 Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 " DT END
+" Sneak PlugIn
+Plug 'justinmk/vim-sneak'
 Plug 'kiteco/vim-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rakr/vim-one'
@@ -145,18 +147,47 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'morhetz/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug '/home/mpaulson/personal/vim-be-good'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'mlaursen/vim-react-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+let g:purify_bold = 1        " default: 1
+let g:purify_italic = 1      " default: 1
+let g:purify_underline = 1   " default: 1
+let g:purify_undercurl = 1   " default: 1
+let g:purify_inverse = 1     " default: 1
+
+" Sneak Setup
+let g:sneak#label = 1
+
+" case insensitive sneak
+let g:sneak#use_ic_scs = 1
+
+" immediately move to the next instance of search, if you move the cursor sneak is back to default behavior
+let g:sneak#s_next = 1
+
+" remap so I can use , and ; with f and t
+map gS <Plug>Sneak_,
+map gs <Plug>Sneak_;
+
+" Change the colors
+highlight Sneak guifg=black guibg=#00C7DF ctermfg=black ctermbg=cyan
+highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
+
+" Cool prompts
+let g:sneak#prompt = '🕵'
+let g:sneak#prompt = '🔎'
+
+
+
 "=======================================================================
 " Configurig Cursor Color based on Mode
 let cursormode_color_map = {
@@ -170,6 +201,18 @@ let cursormode_color_map = {
 
 " Emmet Autocomplete (Same as VS Code!)
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+nnoremap <F2> <Plug>(coc-rename)
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
@@ -201,9 +244,18 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-let g:airline_theme='one'
-colorscheme one
+let g:airline_theme='gruvbox'
+        
+colorscheme gruvbox
 set background=dark
+" Gruvbox Options
+let g:gruvbox_bold='1'
+let g:gruvbox_italic='1'
+let g:gruvbox_underline='1'
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_undercurl='1'
+let g:gruvbox_number_column='#689d6a'
+
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
             \ 'javascript.jsx' : {
