@@ -1,0 +1,53 @@
+# github.com/rafi i3status config
+#
+# i3status configuration file
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+	colors = false
+	color_good = "#BBBBBB"
+	color_bad = "#CC1616"
+	color_degraded = "#55858E"
+	interval = 2
+    markup=pango
+}
+
+order += "volume master"
+order += "memory"
+order += "cpu_usage"
+order += "disk /"
+order += "tztime local"
+
+
+volume master {
+    device="pulse"
+#	device ="alsa_output.pci-0000_28_00.3.analog-stereo"
+        format = "<span background='#ffecbb'foreground='#25355b'> Vol:%volume </span> "
+        format_muted = "Vol:(%volume) "
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+cpu_usage {
+	format = "<span background='#ffecbb' foreground='#25355b' > CPU:%usage </span> "
+}
+
+disk "/" {
+	format = "<span background='#ffecbb' foreground='#25355b' > Free:%avail </span> " 
+    separator_block_width = 5
+}
+
+memory {
+        format = "<span background='#ffecbb' foreground='#25355b'> Mem:%used </span> "
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+	format = "<span background='#ffecbb' foreground='#25355b'> %time </span> "
+    	format_time = "%h-%d-%Y %H:%M"
+}
