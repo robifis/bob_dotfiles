@@ -109,6 +109,14 @@ alias ezrc='edit ~/.zshrc'
 # Show help for this .bashrc file
 alias hlp='less ~/.bashrc_help'
 
+
+# Open File types
+alias -s {yml,yaml}=vim
+alias -s {jsx,js}=vim
+alias -s {html}=vim
+alias -s {css}=vim
+
+
 # alias to show the date
 alias da='date "+%Y-%m-%d %A %T %Z"'
 
@@ -137,7 +145,13 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 alias update="sudo apt update && sudo apt upgrade -y"
-alias remove="sudo apt autoremove -y"
+alias remove="sudo apt remove --purge -y"
+
+github(){
+  git add .
+  git commit -m "Autocommit"
+  git push
+}
 
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
