@@ -159,7 +159,7 @@ alias bd='cd "$OLDPWD"'
 alias rmd='/bin/rm  --recursive --force --verbose '
 
 # Alias's for multiple directory listing commands
-alias ls='exa -la --group-directories-first --all --grid' # add colors and file type extensions
+alias ls='exa -la --group-directories-first --all' # add colors and file type extensions
 
 # Search command line history
 alias h="history | grep "
