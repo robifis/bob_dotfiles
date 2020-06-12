@@ -1,4 +1,5 @@
 # .bashrc
+PATH="$HOME/.local/bin${PATH:+:${PATH}}"
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -8,7 +9,7 @@ fi
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
-    PATH="$HOME/.local/bin:$HOME/bin:/home/bobby/.cargo/bin/$PATH"
+    PATH="$HOME/.local/bin:$HOME/bin:/home/bobby/.cargo/bin/:/usr/local/bin/$PATH"
 fi
 export PATH
 
@@ -19,3 +20,5 @@ export PATH
 
 export NVM_DIR="/home/bobby/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

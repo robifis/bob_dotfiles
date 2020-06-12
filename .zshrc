@@ -1,10 +1,14 @@
-# If you come from bash you might have to change your $PATH.
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.zsh/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.zsh/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-PATH=$HOME/bin:/usr/local/bin:home/bobby/.cargo/bin/$PATH
+PATH=$HOME/.local/bin:$HOME/.cargo/bin/:$HOME/.cargo/bin:/usr/local/bin/:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/bobby/.oh-my-zsh"
+export ZSH="/home/bobby/.zsh/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -80,12 +84,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+#Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -98,23 +102,28 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-plugins=(zsh-autsuggestions)
+plugins=(zsh-autsuggestions, zsh-syntax-highlighting )
 # Set the default editor
 export EDITOR=vim
 export VISUAL=vim
 
 # Edit this .bashrc file
-alias ezrc='edit ~/.zshrc'
+alias ezrc='vim ~/.zshrc'
 
 # Show help for this .bashrc file
 alias hlp='less ~/.bashrc_help'
 
+alias tidy= "sudo pacman -Rns $(pacman -Qtdq)"
+alias optimise="sudo pacman-optimize"
 
 # Open File types
 alias -s {yml,yaml}=vim
 alias -s {jsx,js}=vim
 alias -s {html}=vim
 alias -s {css}=vim
+
+# React App Alias
+alias reactapp="npx create-react-app $1"
 
 
 # alias to show the date
@@ -129,7 +138,6 @@ alias ps='ps auxf'
 alias ping='ping -c 10'
 alias less='less -R'
 alias cls='clear'
-alias apt-get='sudo apt-get'
 alias multitail='multitail --no-repeat -c'
 alias freshclam='sudo freshclam'
 alias vi='vim'
@@ -144,15 +152,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-alias update="sudo apt update && sudo apt upgrade -y"
-alias remove="sudo apt remove --purge -y"
-
-github(){
-  git add .
-  git commit -m "Autocommit"
-  git push
-}
-
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
 
@@ -160,29 +159,7 @@ alias bd='cd "$OLDPWD"'
 alias rmd='/bin/rm  --recursive --force --verbose '
 
 # Alias's for multiple directory listing commands
-alias la='exa -Alh' # show hidden files
 alias ls='exa -la --group-directories-first --all --grid' # add colors and file type extensions
-alias lx='exa -lXBh' # sort by extension
-alias lk='exa -lSrh' # sort by size
-alias lc='exa -lcrh' # sort by change time
-alias lu='exa -lurh' # sort by access time
-alias lr='exa -lRh' # recursive exa
-alias lt='exa -ltrh' # sort by date
-alias lm='exa -alh |more' # pipe through 'more'
-alias lw='exa -xAh' # wide listing format
-alias ll='exa -Fls' # long listing format
-alias labc='exa -lap' #alphabetical sort
-alias lf="exa -l | egrep -v '^d'" # files only
-alias ldir="exa -l | egrep '^d'" # directories only
-alias lst="exa --tree" #Folder Tree
-
-# alias chmod commands
-alias mx='chmod a+x'
-alias 000='chmod -R 000'
-alias 644='chmod -R 644'
-alias 666='chmod -R 666'
-alias 755='chmod -R 755'
-alias 777='chmod -R 777'
 
 # Search command line history
 alias h="history | grep "
@@ -190,21 +167,6 @@ alias h="history | grep "
 # Search running processes
 alias p="ps aux | grep "
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
-
-# Search files in the current folder
-alias f="find . | grep "
-
-# Count all files (recursively) in the current folder
-alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
-
-# To see if a command is aliased, a file, or a built-in command
-alias checkcommand="type -t"
-
-# Show current network connections to the server
-alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
-
-# Show open ports
-alias openports='netstat -nape --inet'
 
 # Alias's for safe and forced reboots
 alias rebootsafe='sudo shutdown -r now'
@@ -218,21 +180,8 @@ alias tree='tree -CAhF --dirsfirst'
 alias treed='tree -CAFd'
 alias mountedinfo='df -hT'
 
-# Alias's for archives
-alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias untar='tar -xvf'
-alias unbz2='tar -xvjf'
-alias ungz='tar -xvzf'
-
-# Show all logs in /var/log
-alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
-
 # SHA1
 alias sha1='openssl sha1'
-
-
 
 # Copy file with a progress bar
 cpp()
@@ -255,47 +204,11 @@ cpp()
 	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
 
-# Copy and go to the directory
-cpg ()
-{
-	if [ -d "$2" ];then
-		cp $1 $2 && cd $2
-	else
-		cp $1 $2
-	fi
-}
-
-# Move and go to the directory
-mvg ()
-{
-	if [ -d "$2" ];then
-		mv $1 $2 && cd $2
-	else
-		mv $1 $2
-	fi
-}
-
 # Create and go to the directory
 mkdirg ()
 {
 	mkdir -p $1
 	cd $1
-}
-
-# Goes up a specified number of directories  (i.e. up 4)
-up ()
-{
-	local d=""
-	limit=$1
-	for ((i=1 ; i <= limit ; i++))
-		do
-			d=$d/..
-		done
-	d=$(echo $d | sed 's/^\///')
-	if [ -z "$d" ]; then
-		d=..
-	fi
-	cd $d
 }
 
 #Automatically do an ls after each cd
@@ -417,40 +330,11 @@ install_bashrc_support ()
 	fi
 }
 
-# Show current network information
-netinfo ()
-{
-	echo "--------------- Network Information ---------------"
-	/sbin/ifconfig | awk /'inet addr/ {print $2}'
-	echo ""
-	/sbin/ifconfig | awk /'Bcast/ {print $3}'
-	echo ""
-	/sbin/ifconfig | awk /'inet addr/ {print $4}'
-
-	/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
-	echo "---------------------------------------------------"
-}
-
-# IP address lookup
-alias whatismyip="whatsmyip"
-function whatsmyip ()
-{
-	# Dumps a list of all IP addresses for every device
-	# /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
-
-	# Internal IP Lookup
-	echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
-
-	# External IP Lookup
-	echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
-}
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#DB9065,underline"
 
-source /home/bobby/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/bobby/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/powerlevel10k_/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -491,4 +375,8 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
 
-colorscript random
+### RANDOM COLOR SCRIPT ###
+/opt/shell-color-scripts/colorscript.sh random
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
