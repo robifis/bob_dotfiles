@@ -11,5 +11,4 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # polybar main &
 polybar -c ~/.config/polybar/topbar.ini top &
 polybar -c ~/.config/polybar/bottom.ini bottom &
-
 echo "Polybar launched..."

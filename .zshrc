@@ -15,6 +15,7 @@ export ZSH="/home/bobby/.zsh/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -106,6 +107,10 @@ plugins=(zsh-autsuggestions, zsh-syntax-highlighting )
 # Set the default editor
 export EDITOR=vim
 export VISUAL=vim
+
+# Mounting Drives
+alias mountLinux="sudo mount -t ext4 /dev/sda2 ~/linuxdrive"
+alias mountNTFS="sudo mount -t ntfs-3g /dev/sda1 ~/randomStorage"
 
 # Edit this .bashrc file
 alias ezrc='vim ~/.zshrc'
@@ -378,5 +383,20 @@ bindkey '^[3;5~' delete-char
 ### RANDOM COLOR SCRIPT ###
 /opt/shell-color-scripts/colorscript.sh random
 
+# Hashing to add new Path Variables
+zshcache_time="$(date +%s%N)"
+
+autoload -Uz add-zsh-hook
+
+rehash_precmd() {
+  if [[ -a /var/cache/zsh/pacman ]]; then
+    local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
+    if (( zshcache_time < paccache_time )); then
+      rehash
+      zshcache_time="$paccache_time"
+    fi
+  fi
+}
+add-zsh-hook -Uz precmd rehash_precmd
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

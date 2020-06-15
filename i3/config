@@ -12,12 +12,13 @@
 # App Variables
 set $browser chromium
 set $term alacritty
+set $files Thunar
 
 # Setting default mod key
 set $mod Mod4
 
 # Hide borders
-hide_edge_borders none
+hide_edge_borders true
 
 #############################
 ### settings for i3-gaps: ###
@@ -25,7 +26,10 @@ hide_edge_borders none
 
 # Set inner/outer gaps
 gaps inner 20
-gaps outer 5
+gaps outer 0
+
+# Border Radius
+# border_radius 5 
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -43,7 +47,7 @@ gaps outer 5
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Iosevka Regular 12
+font pango:Iosevka Term Regular, FontAwesome, 12
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -68,8 +72,6 @@ set $inactive-text-color #ffecbb
 set $inactive-font-color #8896ab05
 
 Focus_follows_mouse off
-
-bindsym $mod+d exec --no-startup-id rofi -show run 
 
 for_window [class=".*"] border pixel 0
 
@@ -97,14 +99,13 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
 #bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -128,14 +129,14 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $ws1 "term "
-set $ws2 "www "
-set $ws3 "files "
-set $ws4 "code "
-set $ws5 "game "
-set $ws6 "spare "
-set $ws7 "spare "
-set $ws8 "spare "
+set $ws1 "term"
+set $ws2 "www"
+set $ws3 "files"
+set $ws4 "vim"
+set $ws5 "games"
+set $ws6 "spare"
+set $ws7 "spare"
+set $ws8 "spare"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1 
@@ -162,10 +163,12 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Confirm Logout' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Start $browser on $mod+c
 bindsym $mod+c exec $browser 
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+e exec $files
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -207,6 +210,6 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # exec --no-startup-id picom --config ~/.config/picom.conf 
 exec xcompmgr -c &
+
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-

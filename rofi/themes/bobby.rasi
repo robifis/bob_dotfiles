@@ -1,0 +1,133 @@
+/* vim:ft=css */
+/************************************************
+ * ROFI Color theme
+ * User: leofa
+ * Copyright: 2017 leofa
+ ***********************************************/
+
+* {
+    background:#353535; 
+    font: #d9d9d9;
+    one: #6094CC;
+    two: #417FC1;
+    three: #356AA2;
+    four: #2A5582;
+    five: #78A4D3;
+    six: #8EB3DA;
+    seven: #A5C2E2;
+    eight: #B0CAE5;
+    nine: #D2E1F0;
+}
+
+#window {
+    background-color: @background;
+    border:           1;
+    padding:          5;
+}
+#mainbox {
+    border:  0;
+    padding: 0;
+}
+#message {
+    border:       2px 0px 0px ;
+    border-color: @nine;
+    padding:      1px ;
+}
+#textbox {
+    text-color: @font;
+}
+#listview {
+    fixed-height: 0;
+    border:       0px 0px 0px ;
+    border-color: @one;
+    spacing:      2px ;
+    scrollbar:    true;
+    padding:      2px 0px 0px ;
+}
+#element {
+    border:  0;
+    padding: 1px; 
+}
+#element.normal.normal {
+    background-color: @background;
+    text-color:       @font;
+}
+#element.normal.urgent {
+    background-color: @background;
+    text-color:       @font;
+}
+#element.normal.active {
+    background-color: @one;
+    text-color:       @font;
+}
+#element.selected.normal {
+    background-color: @one;
+    text-color:       @font;
+}
+#element.selected.urgent {
+    background-color: @two;
+    text-color:       @font;
+}
+#element.selected.active {
+    background-color: @three;
+    text-color:       @font;
+}
+#element.alternate.normal {
+    background-color: @background;
+    text-color:       @font;
+}
+#element.alternate.urgent {
+    background-color: @background;
+    text-color:       @font;
+}
+#element.alternate.active {
+    background-color: @background;
+    text-color:       @font;
+}
+#scrollbar {
+    width:        0px ;
+    border:       0;
+    handle-color: @font;
+    handle-width: 8px ;
+    padding:      0;
+}
+#sidebar {
+    border:       0px 0px 0px;
+    padding:      5px 0 0;
+    border-color: @three;
+}
+#button {
+    spacing:    0;
+    text-color: @font;
+}
+#button.selected {
+    background-color: @background;
+    text-color:       @font;
+}
+#inputbar {
+    spacing:    5;
+    text-color: @three;
+    padding:    4px ;
+}
+#case-indicator {
+    spacing:    0;
+    text-color: @font;
+}
+#entry {
+    spacing:    0;
+    text-color: @font;
+}
+#prompt {
+    spacing:    0;
+    text-color: @font;
+}
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @font;
+}
+

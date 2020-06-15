@@ -62,6 +62,7 @@ Plug 'ap/vim-css-color'                            " Color previews for CSS
 Plug 'frazrepo/vim-rainbow'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 "===============================================
 call plug#end()
@@ -111,7 +112,7 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize=38
 
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver']
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-s': 'split',
@@ -145,3 +146,5 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
+
+packloadall
