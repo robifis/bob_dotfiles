@@ -25,7 +25,7 @@ hide_edge_borders true
 #############################
 
 # Set inner/outer gaps
-gaps inner 20
+gaps inner 10
 gaps outer 0
 
 # Border Radius
@@ -213,3 +213,5 @@ exec xcompmgr -c &
 
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec ~/.screenlayout/dualmonitor.sh
+exec_always --no-startup-id  blueberry-tray

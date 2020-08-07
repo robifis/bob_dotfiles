@@ -8,7 +8,12 @@ fi
 PATH=$HOME/.local/bin:$HOME/.cargo/bin/:$HOME/.cargo/bin:/usr/local/bin/:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/bobby/.zsh/.oh-my-zsh"
+export ZSH="/home/bobby/.oh-my-zsh"
+# Keybindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[[3~' delete-char
+bindkey '^[3;5~' delete-char
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -76,7 +81,6 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -104,13 +108,10 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 plugins=(zsh-autsuggestions, zsh-syntax-highlighting )
+autoload -U compinit && compinit
 # Set the default editor
 export EDITOR=vim
 export VISUAL=vim
-
-# Mounting Drives
-alias mountLinux="sudo mount -t ext4 /dev/sda2 ~/linuxdrive"
-alias mountNTFS="sudo mount -t ntfs-3g /dev/sda1 ~/randomStorage"
 
 # Edit this .bashrc file
 alias ezrc='vim ~/.zshrc'
@@ -118,7 +119,7 @@ alias ezrc='vim ~/.zshrc'
 # Show help for this .bashrc file
 alias hlp='less ~/.bashrc_help'
 
-alias tidy= "sudo pacman -Rns $(pacman -Qtdq)"
+alias tidy="sudo pacman -Rns $(pacman -Qtdq)"
 alias optimise="sudo pacman-optimize"
 
 # Open File types
@@ -126,6 +127,7 @@ alias -s {yml,yaml}=vim
 alias -s {jsx,js}=vim
 alias -s {html}=vim
 alias -s {css}=vim
+alias scanwifi='nmcli device wifi list'
 
 # React App Alias
 alias reactapp="npx create-react-app $1"
@@ -164,7 +166,7 @@ alias bd='cd "$OLDPWD"'
 alias rmd='/bin/rm  --recursive --force --verbose '
 
 # Alias's for multiple directory listing commands
-alias ls='exa -la --group-directories-first --all' # add colors and file type extensions
+alias ls='exa --icons -la --group-directories-first --all' # add colors and file type extensions
 
 # Search command line history
 alias h="history | grep "
@@ -337,10 +339,6 @@ install_bashrc_support ()
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#DB9065,underline"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/powerlevel10k_/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -355,7 +353,8 @@ else
   compinit -C -i
 fi
 zmodload -i zsh/complist
-# Save history so we get auto suggestions
+
+# Save --icons history so we get auto suggestions
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
@@ -374,11 +373,6 @@ setopt interactive_comments # allow comments in interactive shells
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
-# Keybindings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey '^[[3~' delete-char
-bindkey '^[3;5~' delete-char
 
 ### RANDOM COLOR SCRIPT ###
 /opt/shell-color-scripts/colorscript.sh random
@@ -400,3 +394,6 @@ rehash_precmd() {
 add-zsh-hook -Uz precmd rehash_precmd
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+eval eval $(/usr/local/bin/starship init ion --print-full-init)
+source /home/bobby/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
