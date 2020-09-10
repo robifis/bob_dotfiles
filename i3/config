@@ -29,7 +29,7 @@ gaps inner 10
 gaps outer 0
 
 # Border Radius
-# border_radius 5 
+border_radius 5 
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -37,11 +37,11 @@ gaps outer 0
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-# smart_gaps no_gaps
+smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-#smart_borders no_gaps
+smart_borders on
 
 # Font for window titles. Will also be used by the ;ar unless a different font
 # is used in the bar {} block below.
@@ -73,7 +73,7 @@ set $inactive-font-color #8896ab05
 
 Focus_follows_mouse off
 
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 3
 
 # change focus
 bindsym $mod+h focus left
@@ -111,9 +111,10 @@ bindsym $mod+t layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 set $tb #ffdab922
+set $focused #ffc93c
 
 # class                     border  backgr. text indicator child_border
-client.focused              $tb     $tb     $fg  $bg       $tb
+client.focused              $focused     $tb     $fg  $bg       $focused
 client.focused_inactive     $tb     $tb     $fg  $bg       $tb
 client.unfocused            $tb     $tb     $fg  $bg       $tb
 client.urgent               $tb     $tb     $fg  $bg       $tb

@@ -68,7 +68,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme ayu
+colorscheme gruvbox
 set background=dark
 
 let ayucolor="dark"
