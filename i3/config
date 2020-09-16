@@ -216,3 +216,4 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec ~/.screenlayout/dual.sh
 exec_always --no-startup-id  blueberry-tray
 exec setxkbmap gb
+exec picom --config ~/.config/picom.conf
