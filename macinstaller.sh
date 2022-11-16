@@ -27,8 +27,8 @@ cd ..
 sudo chsh -S $(which zsh)
 chsh -S $(which zsh)
 
-source .zsh 
-source .vimrc
+source ~/.zshrc
+source ~/.vimrc
 
 brew update && brew upgrade && brew doctor
 brew cleanup
@@ -36,7 +36,7 @@ brew cleanup
 
 
 echo "General optimisations...:"
-xcode-select —install
+xcode-select -—install
 defaults write com.apple.dock autohide-delay -float 0; defaults write com.apple.dock autohide-time-modifier -int 0;killall Dock
 defaults write com.apple.Dock showhidden -bool TRUE && killall Dock
 defaults write com.apple.dock static-only -bool TRUE; killall Dock
