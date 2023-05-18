@@ -85,7 +85,7 @@ else
   export EDITOR='vim'
 fi
 
-source $ZSH/oh-my-zsh.sh
+source ~/.oh-my-zsh/oh-my-zsh.sh
 
 alias tidy="sudo pacman -Rns $(pacman -Qtdq)"
 alias optimise="sudo pacman-optimize"
@@ -221,3 +221,4 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#DB9065,underline"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

@@ -23,7 +23,7 @@ font:
   italic:
     family: FiraCode Nerd Font Mono
     style: Italic
-  size: 10
+  size: 14
   offset:
     x: 0
     y: 0
@@ -62,7 +62,7 @@ bell:
   animation: EaseOutExpo
   duration: 0
   color: "#ffffff"
-background_opacity: 1
+window.opacity: 1
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: true

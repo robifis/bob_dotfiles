@@ -1,17 +1,17 @@
 configuration {
-	modi: "window,run,ssh";
+	modi: "window,run";
 	width: 20;
 	lines: 5;
 /*	columns: 1;*/
-	font: "JetBrains Mono Nerd Font 22";
+	font: "FiraCode Nerd Font 22";
 /*	bw: 1;*/
 /*	location: 0;*/
 	padding: 20;
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 	fixed-num-lines: true;
-	show-icons: false;
-/*	terminal: "rofi-sensible-terminal";*/
+	show-icons: true;
+/*	terminal: "alacritty";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/
@@ -52,8 +52,7 @@ configuration {
 /*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
-/*	show-match: true;*/
-	theme: "~/.config/rofi/themes/config.rasi";
+/*	show-match: true;*/ 
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -143,3 +142,5 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+/* @theme: "~/.config/rofi/themes/config.rasi";
+@theme "/home/bobbyolejnik/.local/share/rofi/themes/squared-material-red.rasi"
